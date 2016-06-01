@@ -1,0 +1,195 @@
+package a;
+import java.util.Scanner;
+
+import javax.swing.text.StyledEditorKit.ForegroundAction;
+
+class StringMinus{
+    private static int flag = 1;
+	
+    public static void main(String[] args){
+    Scanner sc=new Scanner(System.in);
+    String str1=sc.nextLine();
+    String str2=sc.nextLine(); 
+    run(str1,str2);
+            
+    }
+    
+    public static String appendZero(String a){
+
+        //a="0"+a;
+        return a="0"+a;
+    }
+    
+    public static int toInt(char ch){
+        int a=ch-48;
+        return a;
+    }
+    
+    public static int[] toMinus(char[] arr1,char[] arr2){
+        
+        int[] arr=new int[arr1.length];
+        int[] arr3=new int[arr1.length];
+        int[] arr4=new int[arr1.length];
+        for(int i=0;i<arr1.length;i++){
+            arr3[i]=toInt(arr1[i]);
+            arr4[i]=toInt(arr2[i]);
+        }
+        
+        //大的数在前，小的数在后
+        for(int i=0;i<arr1.length;i++){
+            if(arr3[i]==arr4[i]){
+                continue;
+            }else if(arr3[i]<arr4[i]){
+                int[] temp=new int[arr1.length];
+                temp=arr3;
+                arr3=arr4;
+                arr4=temp;      
+                break;
+            }else{
+                break;
+            }
+        }
+        
+        
+        
+/*         System.out.println("交换后：");
+        for(int i=0;i<arr1.length;i++){
+            System.out.print(arr3[i]);
+        }
+        System.out.println();
+        for(int i=0;i<arr1.length;i++){
+            System.out.print(arr4[i]);
+        }
+        System.out.println(); */
+        
+ /*        if(arr3[0]-arr4[0]>1){
+            arr[0]=arr3[0]-arr4[0];
+        }else{ */
+            
+            //int[] arr=new int[arr1.length];//相减得负数时
+            
+           // return arr1;
+           
+           if(arr1.length==1){
+               arr[0]=arr3[0]-arr4[0];
+           }else{
+               
+                //借位
+                for(int i=arr1.length-1;i>0;i--){
+                    
+                    if(arr3[i]>=arr4[i]){
+                        arr[i]=arr3[i]-arr4[i]; 
+                        if(i==1){
+                            arr[0]=arr3[0]-arr4[0];
+                        }
+                    }else{
+                        arr[i]=arr3[i]+10-arr4[i];
+                        arr3[i-1]-=1;
+                        if(i==1){
+                            arr[0]=arr3[0]-arr4[0];
+                        }
+                    }
+                        
+                }
+            }
+
+        //}
+          /*判断需要去掉多少个前置的0*/ 
+           int needRemoveZero = 0;
+           for(int i : arr){
+        	   if(i==0){
+        		   needRemoveZero++;
+        	   }else{
+        		   break;
+        	   }
+           }
+           
+           int[] result = new int[arr.length-needRemoveZero];//int数组默认是0，长度少一个就不会多出一个0
+    	   for(int i = 0 ; i < arr.length ; i++){
+        	   if(i < needRemoveZero ){
+        		   continue;
+        	   }
+        	   result[i-needRemoveZero] = arr[i];
+           }
+           
+        return result;
+        
+    }
+    
+/*     public static int toMinus(int ch1,char ch2){
+        
+        int result;
+        int a=ch1;
+        int b=toInt(ch2);
+        
+        result=a-b;
+        return result;         
+    } */
+    
+    
+    public static void run(String str1,String str2){
+        int len1=str1.length();
+        int len2=str2.length();
+        int len=len1-len2;
+        int num=len;
+        String temp;
+        if(len<0){
+            temp=str1;
+            str1=str2;
+            str2=temp;
+            len=-len;
+        }
+
+         while(len!=0){
+            //if(len>0){
+                str2=appendZero(str2);
+                len--;
+            /*} else{
+                str1=appendZero(str1);
+                len++;
+                len1++;
+            } */
+        } 
+        
+        //System.out.println("补0之后："+str2);
+
+        
+        char[] arr1=str1.toCharArray();
+        char[] arr2=str2.toCharArray();
+/*         for(int i=0;i<len1;i++){
+            System.out.print(arr1[i]+" ");
+        }
+        for(int i=0;i<len2;i++){
+            System.out.print(arr2[i]+" ");
+        } */
+           
+        //遍历相减
+        int[] arr3=new int[arr1.length];
+        arr3=toMinus(arr1,arr2);      
+
+        
+        
+        char[] arr4=new char[arr1.length];
+        if(num<0){
+            arr3[0]=-arr3[0];
+        }else if(num==0){
+            
+            for(int i=0;i<arr1.length;i++){
+                for(int j=0;j<arr1.length;j++){
+                    
+                }
+            }
+            
+        }
+        
+        
+        
+        System.out.print("结果是:");
+        for(int i=0;i<arr3.length;i++){
+            System.out.print(arr3[i]);
+        }
+        
+        
+    }
+    
+}

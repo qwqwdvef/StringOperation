@@ -1,0 +1,80 @@
+package a;
+
+
+class StringAdd  
+{
+    
+    public static void run(String a,String b){
+        
+        int len = a.length() - b.length();
+        if(len<0) 
+        {
+            len = len *-1;
+            appendZero(a,len);
+
+        }else{
+            appendZero(b,len);
+        }
+        
+        String result = add(a,b);
+        
+        System.out.println("结果是="+result);
+    }
+    
+    public static String appendZero(String a,int length){
+        for(int i = 0 ;i<length;i++){
+            a+="0";
+        }
+        return a;
+    }
+    
+    public static String add(String a,String b){
+        String result="";
+        
+        /*
+        *进行a+b的运算
+        */
+        char[] arr1 = a.toCharArray();
+        char[] arr2 = b.toCharArray();
+        
+        int maxLength = arr1.length>arr2.length?arr1.length:arr2.length;
+        int var1 = 0; //进位变量
+         
+
+        for(int i = maxLength - 1 ; i >= 0 ; i-- ){
+            
+            int c = toInt(arr1[i])+toInt(arr2[i]);
+           // System.out.println("--"+c);
+            if(c >= 10){
+                c -= 10;
+                var1 = 1;
+            }else{
+                var1 = 0;
+            }
+            if(i>0){
+                arr1[i-1] += var1;
+            }
+        
+            result = c + result; 
+            
+        }
+        if(var1!=0){
+            result = var1 + result; 
+
+        }
+        return result;
+    }
+    
+    public static int toInt(char s){
+        return (int)s-48;
+    }
+    
+    public static char toChar(int s) {
+        return (char)(s+48);
+    }
+    
+	public static void main (String[] args) 
+	{
+	  StringAdd.run("55","2");
+	}
+}
