@@ -1,6 +1,6 @@
 class StringAdd  
 {
-    
+    /*增加了一个测试注释*/
     public static void run(String a,String b){
         
     	int aLength = a.length();
