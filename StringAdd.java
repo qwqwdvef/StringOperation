@@ -1,6 +1,3 @@
-package a;
-
-
 class StringAdd  
 {
     
@@ -18,10 +15,10 @@ class StringAdd
 		if (a_raidx_point != -1) a_isDecimal = 1;
 		if (b_raidx_point != -1) b_isDecimal = 1;
 
-		int aIndex = a_raidx_point == -1 ? aLength : a_raidx_point; // Ğ¡ÊıµãÇ°µÄ³¤¶È
-		int bIndex = b_raidx_point == -1 ? bLength : b_raidx_point; // Ğ¡ÊıµãÇ°µÄ³¤¶È
+		int aIndex = a_raidx_point == -1 ? aLength : a_raidx_point; // å°æ•°ç‚¹å‰çš„é•¿åº¦
+		int bIndex = b_raidx_point == -1 ? bLength : b_raidx_point; // å°æ•°ç‚¹å‰çš„é•¿åº¦
 
-		/* Ğ¡ÊıµãÇ°²¹0 */
+		/* å°æ•°ç‚¹å‰è¡¥0 */
 		int len = aIndex - bIndex;
 		if (len < 0) {
 			len = len * -1;
@@ -30,7 +27,7 @@ class StringAdd
 			b = appendZeroAtHead(b, len);
 		}
 
-		/* ²¹Ğ¡Êıµã,ÒÔ¼°Ğ¡ÊıµãºóµÄ0 */
+		/* è¡¥å°æ•°ç‚¹,ä»¥åŠå°æ•°ç‚¹åçš„0 */
 
 		if (b_isDecimal == 1 && a_isDecimal == 0) {
 			a += ".";
@@ -47,10 +44,10 @@ class StringAdd
 			}
 		}
 
-		/* Ğ¡Êıµãºó²¹0 */
+		/* å°æ•°ç‚¹åè¡¥0 */
 
-		aIndex = aLength - aIndex - a_isDecimal; // Ğ¡ÊıµãºóµÄ³¤¶È
-		bIndex = bLength - bIndex - b_isDecimal; // Ğ¡ÊıµãºóµÄ³¤¶È
+		aIndex = aLength - aIndex - a_isDecimal; // å°æ•°ç‚¹åçš„é•¿åº¦
+		bIndex = bLength - bIndex - b_isDecimal; // å°æ•°ç‚¹åçš„é•¿åº¦
 
 		len = aIndex - bIndex;
 		if (len < 0) {
@@ -62,7 +59,7 @@ class StringAdd
 		}
         String result = add(a,b);
         
-        System.out.println("½á¹ûÊÇ="+result);
+        System.out.println("ç»“æœæ˜¯="+result);
     }
     
     public static String appendZeroAtLast(String a, int length) {
@@ -88,20 +85,20 @@ class StringAdd
     			String result = "";
 
     			/*
-    			 * ½øĞĞa+bµÄÔËËã
+    			 * è¿›è¡Œa+bçš„è¿ç®—
     			 */
     			char[] arr1 = a.toCharArray();
     			char[] arr2 = b.toCharArray();
 
     			int maxLength = arr1.length > arr2.length ? arr1.length : arr2.length;
-    			int var1 = 0; // ½øÎ»±äÁ¿
+    			int var1 = 0; // è¿›ä½å˜é‡
 
     			for (int i = maxLength - 1; i >= 0; i--) {
     				if(arr1[i] == '.' && arr2[i] == '.' ){
     					result = arr1[i] + result;
     					continue;
     				}else if(arr1[i] == '.' && arr2[i] != '.' ){
-    					return "Ğ¡ÊıµãÎ»ÖÃÃ»ÓĞ¶ÔÆë";
+    					return "å°æ•°ç‚¹ä½ç½®æ²¡æœ‰å¯¹é½";
     				}
     				
     				int c = toInt(arr1[i]) + toInt(arr2[i]);
