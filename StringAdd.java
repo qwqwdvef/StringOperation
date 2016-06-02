@@ -58,7 +58,6 @@ class StringAdd
 			b = appendZeroAtLast(b, len);
 		}
         String result = add(a,b);
-        
         System.out.println("结果是="+result);
     }
     
