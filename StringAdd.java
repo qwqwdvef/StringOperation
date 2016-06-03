@@ -1,6 +1,10 @@
 class StringAdd  
 {
+<<<<<<< HEAD
      /*这不是测试注释*/
+=======
+    /*增加了一个测试注释*/
+>>>>>>> qwqwdvef/master
     public static void run(String a,String b){
         
     	int aLength = a.length();
@@ -58,7 +62,6 @@ class StringAdd
 			b = appendZeroAtLast(b, len);
 		}
         String result = add(a,b);
-        
         System.out.println("结果是="+result);
     }
     
