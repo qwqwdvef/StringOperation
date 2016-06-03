@@ -1,0 +1,159 @@
+import java.util.Scanner;
+
+class StringAdd3{
+    
+    private static int value=0;//判断进位；
+    private static int value1=0;//判断相加的是整数部分还是小数部分
+    
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        String str1=sc.nextLine();
+        String str2=sc.nextLine();
+        run(str1,str2);
+    }
+    public static String appendZero(String a,int len){
+        if(value1==0){
+            for(int i=0;i<len;i++){
+                a+="0";
+            }
+        }else{
+            for(int i=0;i<len;i++){
+                a="0"+a;
+            }
+        }
+        return a;
+    }    
+    
+    public static int toInt(char ch){
+        int a=ch-48;
+        return a;
+    }
+    
+    public static void run(String str1,String str2){
+        String result="";
+        String a1,b1,a2,b2,c;
+        
+        int x=str1.indexOf(".");
+        int y=str2.indexOf(".");
+        
+        if(x==-1){
+            str1=str1+".0";
+        }else if(y==-1){
+            str2=str2+".0";
+        }
+        
+        a1=getFloat(str1);
+        a2=getFloat(str2);
+        b1=getInt(str1);
+        b2=getInt(str2);
+        
+        a1=run1(a1,a2);
+        value1=1;
+        b1=run1(b1,b2);
+        
+        c=b1+"."+a1;
+        
+        //System.out.println("A:"+c);
+        
+        char[] arr=c.toCharArray();
+        int m=1;
+        for(int i=arr.length-1;i>=0;i--){
+            if(arr[i]=='0'){
+                m++;
+                continue;
+            }else{
+                break;
+            }
+        }
+        if(arr[arr.length-m]=='.'){
+            m++;
+        }
+        for(int i=arr.length-m;i>=0;i--){
+            result=arr[i]+result;
+        }
+            
+        System.out.println("结果是:"+result);
+    }    
+    
+    public static String run1(String str1,String str2){
+        String result;
+        
+        int len;
+        int len1=str1.length();
+        int len2=str2.length();
+        len=len1-len2>0?len1-len2:len2-len1;
+        
+        if(len1>len2){
+            str2=appendZero(str2,len);
+        }else if(len1<len2){
+            str1=appendZero(str1,len);
+        }        
+        
+        char[] arr1=str1.toCharArray();
+        char[] arr2=str2.toCharArray();
+        
+        return result=add(arr1,arr2);
+        
+        //System.out.println("结果是:"+result);
+    }
+    
+    public static String add(char[] arr1,char[] arr2){
+        String result="";
+        
+        //int value=0;//判断进位时用
+        for(int i=arr1.length-1;i>=0;i--){
+            int a=toInt(arr1[i])+toInt(arr2[i])+value;
+            if(a>=10&&i!=0){
+                a-=10;
+                value=1;
+            }else if(a>=10&&i==0){
+                if(value1==0){
+                    a-=10;
+                    value=1;
+                }
+            }
+            else{
+                value=0;
+            }
+            result=a+result;
+        }
+        
+        return result;
+        
+    }
+    
+    public static String getInt(String str){
+        String result="";
+        int a=str.indexOf(".");
+        char[] arr=new char[a];
+        char[] arr1=str.toCharArray();
+        for(int i=0;i<a;i++){
+            arr[i]=arr1[i];
+            result+=arr[i];
+        }
+        
+        return result;
+        
+    }
+    public static String getFloat(String str){
+        String result="";
+        int a=str.indexOf(".");
+        char[] arr1=str.toCharArray();
+        int b=arr1.length-a-1;
+        char[] arr=new char[b];        
+        for(int i=0;i<b;i++){
+            arr[i]=arr1[i+a+1];
+            result+=arr[i];
+        }
+        
+        return result;
+        
+    }
+    
+    
+}
+
+
+
+
+
